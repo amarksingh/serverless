@@ -1,4 +1,4 @@
-
+const path = require('path');
 const StreamRequest = require('./stream/request');
 const StreamResponse = require('./stream/response');
 const { resolveWithRequire } = require("./utils")
@@ -73,18 +73,16 @@ class Serverless {
 	}
 
 	entry(entryPath) {
-		this.loadMainModule(entryPath);
+		if (entryPath) {
+			this.loadMainModule(entryPath);
+		}
 	}
 
 	loadMainModule(mainModulePath) {
 		const mainPath = path.resolve(mainModulePath);
 		const mainModule = require(mainPath);
-		Object.defineProperty(require, 'main', {
-			value: require.cache[mainPath] || null,
-			writable: false,
-			configurable: false,
-			enumerable: true
-		});
+		const cachedModule = require.cache[mainPath] || null;
+		require.main = cachedModule;
 
 		process.mainModule = require.main;
 

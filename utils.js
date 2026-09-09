@@ -1,3 +1,4 @@
+const path = require('path');
 exports.normalizeHeadersGeneral = function normalizeHeaders(headers) {
   const normalized = {};
   for (const key in headers) {

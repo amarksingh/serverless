@@ -139,8 +139,8 @@ class Request extends IncomingMessage {
           : [];
         request.remoteAddress = request.headers['x-forwarded-for']?.split(',')[0] || '';
         request.isEncrypted = request.headers['x-forwarded-proto'] === 'https';
-        if (req.rawBody instanceof Buffer) rawBodyBuf = req.rawBody;
-        else if (req.rawBody) rawBodyBuf = Buffer.from(req.rawBody);
+        if (req.rawBody instanceof Buffer) request.rawBodyBuf = req.rawBody;
+        else if (req.rawBody) request.rawBodyBuf = Buffer.from(req.rawBody);
         break;
 
       case 'gcp':
