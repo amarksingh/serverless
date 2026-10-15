@@ -20,6 +20,12 @@ class Response extends ServerResponse {
   }
 
   write(chunk, ...args) {
+    /**
+     * if method.
+     *
+     * @param {any} typeof chunk
+     * @returns {any}
+     */
     if (typeof chunk === 'string') {
       this._chunks.push(Buffer.from(chunk));
     } else if (Buffer.isBuffer(chunk)) {
@@ -48,6 +54,10 @@ class Response extends ServerResponse {
   }
 
   isPlatform(platform) {
+    /**
+     * platform property.
+     * @type {any}
+     */
     platform = typeof platform === 'string' ? [platform] : platform;
     return platform && platform.includes(this._platform);
   }
@@ -74,6 +84,12 @@ class Response extends ServerResponse {
 
     const statusCode = this.statusCode || 200;
 
+    /**
+     * switch method.
+     *
+     * @param {any} this._platform
+     * @returns {any}
+     */
     switch (this._platform) {
       case 'azure':
         return {

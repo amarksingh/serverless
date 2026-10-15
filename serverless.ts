@@ -3,6 +3,12 @@ const StreamRequest = require('./stream/request');
 const StreamResponse = require('./stream/response');
 const { resolveWithRequire } = require("./utils")
 class Serverless {
+	/**
+	 * constructor method.
+	 *
+	 * @param {any} { serverless }
+	 * @returns {any}
+	 */
 	constructor({ serverless }) {
 		this.stream();
 		const handler = this.handle()
@@ -18,6 +24,13 @@ class Serverless {
 		this.entry(resolveWithRequire(serverless.handler))
 	}
 
+	/**
+	 * stream method.
+	 *
+	 * @param {any} request
+	 * @param {any} response
+	 * @returns {any}
+	 */
 	stream(request = StreamRequest, response = StreamResponse) {
 		if (typeof request != 'function') {
 			throw new Error('Request class must be function/class');
@@ -39,6 +52,12 @@ class Serverless {
 		});
 	}
 
+	/**
+	 * request method.
+	 *
+	 * @param {any} HttpRequest
+	 * @returns {any}
+	 */
 	request(HttpRequest) {
 		if (typeof HttpRequest != 'function') {
 			throw new Error('HttpRequest class must be function/class')
@@ -46,6 +65,12 @@ class Serverless {
 		Object.defineProperty(this, '$request', { value: HttpRequest })
 	}
 
+	/**
+	 * response method.
+	 *
+	 * @param {any} HttpResponse
+	 * @returns {any}
+	 */
 	response(HttpResponse) {
 		if (typeof HttpResponse != 'function') {
 			throw new Error('HttpResponse class must function/class')
@@ -53,10 +78,21 @@ class Serverless {
 		Object.defineProperty(this, '$response', { value: HttpResponse })
 	}
 
+	/**
+	 * register method.
+	 *
+	 * @param {any} handler
+	 * @returns {any}
+	 */
 	register(handler) {
 		Object.defineProperty(this, '$handler', { value: handler })
 	}
 
+	/**
+	 * handle method.
+	 *
+	 * @returns {any}
+	 */
 	handle() {
 		return (event, context) => {
 			return new Promise((resolve) => {
@@ -72,12 +108,24 @@ class Serverless {
 		};
 	}
 
+	/**
+	 * entry method.
+	 *
+	 * @param {any} entryPath
+	 * @returns {any}
+	 */
 	entry(entryPath) {
 		if (entryPath) {
 			this.loadMainModule(entryPath);
 		}
 	}
 
+	/**
+	 * loadMainModule method.
+	 *
+	 * @param {any} mainModulePath
+	 * @returns {any}
+	 */
 	loadMainModule(mainModulePath) {
 		const mainPath = path.resolve(mainModulePath);
 		const mainModule = require(mainPath);

@@ -17,6 +17,12 @@ exports.normalizeHeaders = function normalizeHeaders(headers, platform, subtype 
 
   // Detect whether array headers are allowed
   const supportsArray = (() => {
+    /**
+     * switch method.
+     *
+     * @param {any} platform
+     * @returns {any}
+     */
     switch (platform) {
       case 'aws':
         switch (subtype) {

@@ -55,6 +55,12 @@ class Request extends IncomingMessage {
     this.httpVersionMajor = 1;
     this.httpVersionMinor = 1;
 
+    /**
+     * if method.
+     *
+     * @param {any} rawBodyBuf?.length
+     * @returns {any}
+     */
     if (rawBodyBuf?.length) {
 
       this.push(rawBodyBuf);
@@ -80,6 +86,12 @@ class Request extends IncomingMessage {
       isEncrypted: false
     }
 
+    /**
+     * switch method.
+     *
+     * @param {any} platform
+     * @returns {any}
+     */
     switch (platform) {
       case 'aws':
         switch (getwayType) {
@@ -171,6 +183,12 @@ class Request extends IncomingMessage {
     }
 
 
+    /**
+     * if method.
+     *
+     * @param {any} !request.headers.cookie && request.cookies.length > 0
+     * @returns {any}
+     */
     if (!request.headers.cookie && request.cookies.length > 0) {
       request.headers.cookie = request.cookies.join('; ');
     }
