@@ -8,7 +8,7 @@ module.exports = {
     ],
     "coverageDirectory": "coverage",
     "collectCoverageFrom": [
-        "**/*.js",
+        "**/*.ts",
         "!**/node_modules/**",
         "!**/coverage/**",
         "!jest.config.js",

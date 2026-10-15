@@ -78,7 +78,7 @@ describe('serverless utils.js', () => {
     describe('resolveWithRequire', () => {
         test('resolves file when path is valid', () => {
             const res = resolveWithRequire('utils.normalizeHeaders', __dirname + '/..');
-            expect(res).toBe(path.resolve(__dirname, '../utils.js'));
+            expect(res).toBe(path.resolve(__dirname, '../utils.ts'));
         });
 
         test('returns null when file does not exist', () => {
