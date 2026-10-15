@@ -4,7 +4,7 @@ const { Readable } = require('stream');
 const { Duplex } = require('stream');
 
 class MockSocket extends Duplex {
-  constructor(options = {}) {
+  constructor(options: Record<string, any> = {}) {
     super();
     this._remoteAddress = options.remoteAddress || '';
     this.encrypted = options.encrypted || false;
@@ -14,18 +14,18 @@ class MockSocket extends Duplex {
     return this._remoteAddress;
   }
 
-  setRemoteAddress(addr) {
+  setRemoteAddress(addr: any) {
     this._remoteAddress = addr;
   }
 
   _read() { }
-  _write(chunk, encoding, callback) {
+  _write(chunk: any, encoding: any, callback: Function) {
     callback();
   }
 }
 
 class Request extends IncomingMessage {
-  constructor(event, context = {}, platform, getwayType) {
+  constructor(event: string, context: Record<string, any> = {}, platform: any, getwayType: any) {
     const {
       method,
       url,
@@ -71,7 +71,7 @@ class Request extends IncomingMessage {
 
   }
 
-  static _normalize(event, context, platform, getwayType) {
+  static _normalize(event: string, context: any, platform: any, getwayType: any) {
     const request = {
       method: 'GET',
       url: '/',

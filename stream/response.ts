@@ -3,9 +3,9 @@ const { Writable } = require('stream');
 const { normalizeHeaders } = require('../utils');
 
 class Response extends ServerResponse {
-  constructor(resolve, platform, getwayType) {
+  constructor(resolve: any, platform: any, getwayType: any) {
     const dummyWritable = new Writable({
-      write(chunk, encoding, callback) {
+      write(chunk: any, encoding: any, callback: Function) {
         callback(); // noop
       }
     });
@@ -19,7 +19,7 @@ class Response extends ServerResponse {
     this._getwayType = getwayType;
   }
 
-  write(chunk, ...args) {
+  write(chunk: any, ...args: any[]) {
     /**
      * if method.
      *
@@ -35,7 +35,7 @@ class Response extends ServerResponse {
     }
   }
 
-  end(chunk, ...args) {
+  end(chunk: any, ...args: any[]) {
     if (chunk) this.write(chunk);
 
     const result = this.toJSON();
@@ -44,7 +44,7 @@ class Response extends ServerResponse {
     return super.end(null, ...args);
   }
 
-  encode(encoding) {
+  encode(encoding: any) {
     this.$isBase64Encoded = (encoding && encoding.toLowerCase() === 'base64');
     return this;
   }
@@ -53,7 +53,7 @@ class Response extends ServerResponse {
     return this.$isBase64Encoded;
   }
 
-  isPlatform(platform) {
+  isPlatform(platform: any) {
     /**
      * platform property.
      * @type {any}

@@ -9,7 +9,7 @@ class Serverless {
 	 * @param {any} { serverless }
 	 * @returns {any}
 	 */
-	constructor({ serverless }) {
+	constructor({ serverless }: any) {
 		this.stream();
 		const handler = this.handle()
 		Object.defineProperties(this, {
@@ -31,7 +31,7 @@ class Serverless {
 	 * @param {any} response
 	 * @returns {any}
 	 */
-	stream(request = StreamRequest, response = StreamResponse) {
+	stream(request: any = StreamRequest, response: any = StreamResponse) {
 		if (typeof request != 'function') {
 			throw new Error('Request class must be function/class');
 		}
@@ -58,7 +58,7 @@ class Serverless {
 	 * @param {any} HttpRequest
 	 * @returns {any}
 	 */
-	request(HttpRequest) {
+	request(HttpRequest: any) {
 		if (typeof HttpRequest != 'function') {
 			throw new Error('HttpRequest class must be function/class')
 		}
@@ -71,7 +71,7 @@ class Serverless {
 	 * @param {any} HttpResponse
 	 * @returns {any}
 	 */
-	response(HttpResponse) {
+	response(HttpResponse: any) {
 		if (typeof HttpResponse != 'function') {
 			throw new Error('HttpResponse class must function/class')
 		}
@@ -84,7 +84,7 @@ class Serverless {
 	 * @param {any} handler
 	 * @returns {any}
 	 */
-	register(handler) {
+	register(handler: Function) {
 		Object.defineProperty(this, '$handler', { value: handler })
 	}
 
@@ -114,7 +114,7 @@ class Serverless {
 	 * @param {any} entryPath
 	 * @returns {any}
 	 */
-	entry(entryPath) {
+	entry(entryPath: any) {
 		if (entryPath) {
 			this.loadMainModule(entryPath);
 		}
@@ -126,7 +126,7 @@ class Serverless {
 	 * @param {any} mainModulePath
 	 * @returns {any}
 	 */
-	loadMainModule(mainModulePath) {
+	loadMainModule(mainModulePath: any) {
 		const mainPath = path.resolve(mainModulePath);
 		const mainModule = require(mainPath);
 		const cachedModule = require.cache[mainPath];
