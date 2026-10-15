@@ -184,4 +184,70 @@ describe('Serverless (serverless.js)', () => {
             Module._load = origLoad;
         }
     });
+
+    test('loadMainModule when require.main descriptor is configurable', () => {
+        const dummyConfig = { serverless: { handler: 'test.fixtures.entryDummy.main' } };
+        const sls = new Serverless(dummyConfig);
+
+        const origGetDesc = Object.getOwnPropertyDescriptor;
+        const origDefProp = Object.defineProperty;
+        let definedProp = false;
+
+        Object.getOwnPropertyDescriptor = function(target, prop) {
+            if (prop === 'main') {
+                return { configurable: true };
+            }
+            return origGetDesc.apply(this, arguments);
+        };
+
+        Object.defineProperty = function(target, prop, descriptor) {
+            if (prop === 'main') {
+                definedProp = true;
+                return target;
+            }
+            return origDefProp.apply(this, arguments);
+        };
+
+        try {
+            const mod = sls.loadMainModule(dummyModulePath);
+            expect(mod).toBeDefined();
+            expect(definedProp).toBe(true);
+        } finally {
+            Object.getOwnPropertyDescriptor = origGetDesc;
+            Object.defineProperty = origDefProp;
+        }
+    });
+
+    test('loadMainModule when require.main descriptor is undefined', () => {
+        const dummyConfig = { serverless: { handler: 'test.fixtures.entryDummy.main' } };
+        const sls = new Serverless(dummyConfig);
+
+        const origGetDesc = Object.getOwnPropertyDescriptor;
+        const origDefProp = Object.defineProperty;
+        let definedProp = false;
+
+        Object.getOwnPropertyDescriptor = function(target, prop) {
+            if (prop === 'main') {
+                return undefined;
+            }
+            return origGetDesc.apply(this, arguments);
+        };
+
+        Object.defineProperty = function(target, prop, descriptor) {
+            if (prop === 'main') {
+                definedProp = true;
+                return target;
+            }
+            return origDefProp.apply(this, arguments);
+        };
+
+        try {
+            const mod = sls.loadMainModule(dummyModulePath);
+            expect(mod).toBeDefined();
+            expect(definedProp).toBe(true);
+        } finally {
+            Object.getOwnPropertyDescriptor = origGetDesc;
+            Object.defineProperty = origDefProp;
+        }
+    });
 });

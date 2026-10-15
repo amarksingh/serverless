@@ -81,8 +81,17 @@ class Serverless {
 	loadMainModule(mainModulePath) {
 		const mainPath = path.resolve(mainModulePath);
 		const mainModule = require(mainPath);
-		const cachedModule = require.cache[mainPath] || null;
-		require.main = cachedModule;
+		const cachedModule = require.cache[mainPath];
+		const desc = Object.getOwnPropertyDescriptor(require, 'main');
+		if (!desc || desc.configurable) {
+			const descriptor = {
+				value: cachedModule,
+				writable: true,
+				configurable: true,
+				enumerable: true
+			};
+			Object.defineProperty(require, 'main', descriptor);
+		}
 
 		process.mainModule = require.main;
 
