@@ -1,5 +1,5 @@
-const { normalizeHeaders, normalizeHeadersGeneral, resolveWithRequire } = require('../utils');
-const path = require('path');
+import { normalizeHeaders, normalizeHeadersGeneral, resolveWithRequire } from '../utils';
+import path from 'path';
 
 describe('serverless utils.js', () => {
     describe('normalizeHeadersGeneral', () => {

@@ -1,4 +1,5 @@
-const Response = require('../stream/response');
+import Response from '../stream/response';
+import stream from 'stream';
 
 describe('StreamResponse (stream/response.js)', () => {
     test('writes string and buffer chunks, default base64 encoding', () => {
@@ -128,7 +129,6 @@ describe('StreamResponse (stream/response.js)', () => {
     test('exercises underlying dummyWritable write method', () => {
         let capturedOptions = null;
         jest.isolateModules(() => {
-            const stream = require('stream');
             const origWritable = stream.Writable;
             stream.Writable = function(opts) {
                 capturedOptions = opts;

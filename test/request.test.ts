@@ -1,4 +1,4 @@
-const Request = require('../stream/request');
+import Request from '../stream/request';
 
 describe('StreamRequest (stream/request.js)', () => {
     describe('MockSocket', () => {

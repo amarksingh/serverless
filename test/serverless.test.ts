@@ -1,6 +1,7 @@
-const fs = require('fs');
-const Serverless = require('../serverless');
-const path = require('path');
+import fs from 'fs';
+import Serverless from '../serverless';
+import path from 'path';
+import Module from 'module';
 
 describe('Serverless (serverless.js)', () => {
     const dummyModulePath = path.resolve(__dirname, 'fixtures/entryDummy.js');
@@ -165,8 +166,7 @@ describe('Serverless (serverless.js)', () => {
         const dummyConfig = { serverless: { handler: 'test.fixtures.entryDummy.main' } };
         const sls = new Serverless(dummyConfig);
 
-        const Module = require('module');
-        const origLoad = Module._load;
+        const origLoad = (Module as any)._load;
         const mainPath = path.resolve(dummyModulePath);
 
         Module._load = function(request, parent, isMain) {
