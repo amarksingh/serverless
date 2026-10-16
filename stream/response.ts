@@ -156,4 +156,4 @@ class Response extends ServerResponse {
   }
 }
 
-export = Response;
+export default Response;

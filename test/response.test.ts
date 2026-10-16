@@ -137,7 +137,8 @@ describe('StreamResponse (stream/response.js)', () => {
             Object.setPrototypeOf(stream.Writable, origWritable);
             stream.Writable.prototype = origWritable.prototype;
 
-            const ResponseModule = require('../stream/response');
+            const _ResponseModule = require('../stream/response');
+            const ResponseModule = _ResponseModule.default || _ResponseModule;
             new ResponseModule(jest.fn(), 'generic', null);
             stream.Writable = origWritable;
         });

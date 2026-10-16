@@ -164,4 +164,4 @@ class Serverless {
   }
 }
 
-export = Serverless;
+export default Serverless;

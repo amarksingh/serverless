@@ -255,4 +255,4 @@ class Request extends IncomingMessage {
 (Request as any).__esModule = true;
 (Request as any).default = Request;
 
-export = Request;
+export default Request;
