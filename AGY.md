@@ -1,7 +1,7 @@
 # @ostro/serverless — Antigravity AI Architecture & Knowledge Base
 
 > **Package Name**: `@ostro/serverless`
-> **Version**: `1.3.15`
+> **Version**: `2.0.0-alpha.1`
 > **Role in Ecosystem**: Modular Core Framework Library
 
 ---
