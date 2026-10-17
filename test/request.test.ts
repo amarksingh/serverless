@@ -1,4 +1,4 @@
-import Request from '../stream/request';
+import Request from '../src/stream/request';
 
 describe('StreamRequest (stream/request.js)', () => {
     describe('MockSocket', () => {

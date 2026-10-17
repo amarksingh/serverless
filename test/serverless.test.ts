@@ -1,5 +1,5 @@
 import fs from 'fs';
-import Serverless from '../serverless';
+import Serverless from '../src/serverless';
 import path from 'path';
 import Module from 'module';
 

@@ -8,7 +8,6 @@
     "build": "tsc -p tsconfig.build.json",
     "prepublishOnly": "npm run build"
   },
-  "dependencies": {},
   "engines": {
     "node": ">=14.0.0"
   },
@@ -45,7 +44,7 @@
     }
   },
   "devDependencies": {
-    "typescript": "^5.8.0",
-    "@types/node": "^22.0.0"
+    "@types/node": "^22.20.5",
+    "typescript": "^5.8.0"
   }
 }

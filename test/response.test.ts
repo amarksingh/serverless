@@ -1,4 +1,4 @@
-import Response from '../stream/response';
+import Response from '../src/stream/response';
 import stream from 'stream';
 
 describe('StreamResponse (stream/response.js)', () => {
@@ -137,7 +137,7 @@ describe('StreamResponse (stream/response.js)', () => {
             Object.setPrototypeOf(stream.Writable, origWritable);
             stream.Writable.prototype = origWritable.prototype;
 
-            const _ResponseModule = require('../stream/response');
+            const _ResponseModule = require('../src/stream/response');
             const ResponseModule = _ResponseModule.default || _ResponseModule;
             new ResponseModule(jest.fn(), 'generic', null);
             stream.Writable = origWritable;
